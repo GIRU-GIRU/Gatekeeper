@@ -1,0 +1,13 @@
+
+Gatekeeper Bot/Config.cs
+Gatekeeper Bot/RunBot.txt
+Gatekeeper Bot/sh.exe.stackdump
+*.dll
+*.json
+*.cache
+*.txt
+*.targets
+*.stackdump
+*.config
+*.props
+*.pdb
