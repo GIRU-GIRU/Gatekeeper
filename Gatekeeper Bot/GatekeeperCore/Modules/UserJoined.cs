@@ -79,24 +79,10 @@ namespace GIRUBotV3.Modules
             int pull = rnd.Next(welcomeArray.Length);
             string welcomeMessage = welcomeArray[pull].ToString();
 
+            Task.Delay(8000).Wait();
+
             await chnl.SendMessageAsync(messageStateYourRegion);
             await chnl.SendMessageAsync(welcomeMessage + messageInfo);
-        }
-
-        [Command("say")]
-        [RequireUserPermission(GuildPermission.ViewAuditLog)]
-        private async Task SayInMain([Remainder]string message)
-        {
-                var chnl = Context.Guild.GetTextChannel(Config.MeleeSlasherMainChannel);
-                await chnl.SendMessageAsync(message);
-        }
-
-        [Command("saynoob")]
-        [RequireUserPermission(GuildPermission.ViewAuditLog)]
-        private async Task SayInNoob([Remainder]string message)
-        {
-            var chnl = Context.Guild.GetTextChannel(Config.TheNoobGateChannel);
-            await chnl.SendMessageAsync(message);
         }
 
 
