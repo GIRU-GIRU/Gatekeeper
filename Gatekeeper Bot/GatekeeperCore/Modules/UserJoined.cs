@@ -20,7 +20,7 @@ namespace GIRUBotV3.Modules
             var noobGateChannel = Context.Guild.GetChannel(Config.TheNoobGateChannel);
             var chnl = noobGateChannel as ITextChannel;
             var insult = await Insults.GetInsult();
-           
+
 
             string[] aggressArray = new string[]
             {
@@ -37,6 +37,7 @@ namespace GIRUBotV3.Modules
                $"nah",
                $"no",
                $"na",
+               $"cry more {insult}",
                $"mb later.. {dubjoyEmoji}",
                $"{dubjoyEmoji}",
                $"{dubjoyEmoji} actually asked for help"

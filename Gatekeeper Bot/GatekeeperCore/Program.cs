@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Gatekeeper.Modules;
 using GIRUBotV3.Modules;
 using GIRUBotV3.Personality;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace GIRUBotV3
         private OnMessage _onMessage;
         //private OnExecutedCommand _onExecutedCommand;
         private IServiceProvider _services;
+        private BotInitialization _botInitialization;
 
         public async Task RunBotAsync()
         {
@@ -35,6 +37,7 @@ namespace GIRUBotV3
             _client = new DiscordSocketClient();
             _commands = new CommandService();
             _onMessage = new OnMessage(_client);
+            _botInitialization = new BotInitialization(_client);
             //_onExecutedCommand = new OnExecutedCommand(_client);
             
             _services = new ServiceCollection()
@@ -44,6 +47,7 @@ namespace GIRUBotV3
             _client.MessageReceived += _onMessage.MessageContainsAsync;
             _client.MessageUpdated += _onMessage.UpdatedMessageContainsAsync;         
             _client.UserJoined += UserJoined.UserJoinedServer;
+            _client.Ready += BotInitialization.StartUpMessages;
          
              //_commands.CommandExecuted += _onExecutedCommand.AdminLog;
             //_client.UserVoiceStateUpdated += _onExecutedCommand.AdminLogVCMovement;
