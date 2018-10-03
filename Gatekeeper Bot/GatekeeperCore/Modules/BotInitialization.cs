@@ -26,12 +26,12 @@ namespace Gatekeeper.Modules
         public static async Task StartUpMessages()
         {
             var chnl = _client.GetChannel(Config.MeleeSlasherMainChannel) as ITextChannel;
-            //await chnl.SendMessageAsync("Gatekeeper initializing...");
-            //Task.Delay(500).Wait();
+            await chnl.SendMessageAsync("Gatekeeper initializing...");
+            Task.Delay(500).Wait();
 
-            //await chnl.SendMessageAsync("...");
-            //Task.Delay(500).Wait();
-            //await chnl.SendMessageAsync("Ready.");
+            await chnl.SendMessageAsync("...");
+            Task.Delay(500).Wait();
+            await chnl.SendMessageAsync("Ready.");
 
             var noobChnl = _client.GetChannel(Config.TheNoobGateChannel);
             var noobChnlUsers = noobChnl.Users;
