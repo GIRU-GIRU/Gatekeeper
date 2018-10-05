@@ -24,7 +24,7 @@ namespace GIRUBotV3
 
         public DiscordSocketClient _client;
         private CommandService _commands;
-        private OnMessage _onMessage;
+        //private OnMessage _onMessage;
         //private OnExecutedCommand _onExecutedCommand;
         private IServiceProvider _services;
         private BotInitialization _botInitialization;
@@ -36,7 +36,7 @@ namespace GIRUBotV3
 
             _client = new DiscordSocketClient();
             _commands = new CommandService();
-            _onMessage = new OnMessage(_client);
+            //_onMessage = new OnMessage(_client);
             _botInitialization = new BotInitialization(_client);
             //_onExecutedCommand = new OnExecutedCommand(_client);
             
@@ -44,8 +44,8 @@ namespace GIRUBotV3
                  .AddSingleton(_commands)
                  .BuildServiceProvider();
 
-            _client.MessageReceived += _onMessage.MessageContainsAsync;
-            _client.MessageUpdated += _onMessage.UpdatedMessageContainsAsync;         
+            //_client.MessageReceived += _onMessage.MessageContainsAsync;
+            //_client.MessageUpdated += _onMessage.UpdatedMessageContainsAsync;         
             _client.UserJoined += UserJoined.UserJoinedServer;
             _client.Ready += BotInitialization.StartUpMessages;
          
@@ -83,14 +83,10 @@ namespace GIRUBotV3
                 var result = await _commands.ExecuteAsync(context, argPos, _services);
                 switch (result.Error)
                 {
-                    case CommandError.UnmetPrecondition: 
-                        await context.Channel.SendMessageAsync(await ErrorReturnStrings.GetNoPerm());
-                        break;
                     case CommandError.ParseFailed:
                         await context.Channel.SendMessageAsync(await ErrorReturnStrings.GetParseFailed());
                         break;
                     default:
-                       Console.WriteLine(result.ErrorReason);
                         break;
                 }                   
             }   

@@ -21,8 +21,22 @@ namespace GIRUBotV3.Modules
             var allUsers = Context.Guild.Users;
             var noobRole = Helpers.ReturnRole(Context.Guild, "noob");
             int purgeReminderCount = 0;
-            int purgeFinalCount = 0;
+            int amountToBePurged = 0;
             ITextChannel theNoobGateChannel = Context.Guild.GetChannel(Config.TheNoobGateChannel) as ITextChannel;
+
+            foreach (var item in allUsers)
+            {
+                if (item.Roles.Contains(noobRole))
+                {
+                    amountToBePurged++;
+                }
+            }
+            if (amountToBePurged == 0)
+            {
+                await Context.Channel.SendMessageAsync("Melee Slasher is currently clean");
+                return;
+            }
+
 
             await Context.Channel.SendMessageAsync($"The Purge is commencing in 5 seconds, cleansing all shitters from Melee Slasher");
             await theNoobGateChannel.SendMessageAsync($"@here you're about to get fucking cleaned out you worthless fucking trash");
@@ -37,7 +51,7 @@ namespace GIRUBotV3.Modules
                     await theNoobGateChannel.SendMessageAsync($"{user.Username} has been cleansed");
                     await user.KickAsync();
                     purgeReminderCount++;
-                    purgeFinalCount++;
+                    
                 }
                 if (purgeReminderCount == 5)
                 {
@@ -46,14 +60,8 @@ namespace GIRUBotV3.Modules
                 }
             }
 
-            if (purgeFinalCount == 0)
-            {
-                await Context.Channel.SendMessageAsync("Melee Slasher is currently clean");
-                return;
-            }
-
             var thePurgeEmbed = new EmbedBuilder();
-            thePurgeEmbed.WithTitle($"⭕          A total of {purgeFinalCount} shitters were cleansed.        ⭕");
+            thePurgeEmbed.WithTitle($"⭕          A total of {amountToBePurged} shitters were cleansed.        ⭕");
             thePurgeEmbed.ThumbnailUrl = "https://cdn.discordapp.com/attachments/300832513595670529/469942372034150440/detailed_helmet_discord_embed.png";
             thePurgeEmbed.WithColor(new Color(255, 0, 0));
             await Context.Channel.SendMessageAsync("", false, thePurgeEmbed.Build());
@@ -66,7 +74,6 @@ namespace GIRUBotV3.Modules
 
         }
 
-
         [Command("say")]
         [RequireUserPermission(GuildPermission.ViewAuditLog)]
         private async Task SayInMain([Remainder]string message)
@@ -74,7 +81,6 @@ namespace GIRUBotV3.Modules
             var chnl = Context.Guild.GetTextChannel(Config.MeleeSlasherMainChannel);
             await chnl.SendMessageAsync(message);
         }
-
         [Command("saynoob")]
         [RequireUserPermission(GuildPermission.ViewAuditLog)]
         private async Task SayInNoob([Remainder]string message)
@@ -83,6 +89,25 @@ namespace GIRUBotV3.Modules
             await chnl.SendMessageAsync(message);
         }
 
+        OverwritePermissions openWindow = new OverwritePermissions(readMessages: PermValue.Inherit);
+        OverwritePermissions closeWindow = new OverwritePermissions(readMessages: PermValue.Deny);
+        [Command("noobwindow open")]
+        [RequireUserPermission(GuildPermission.ViewAuditLog)]
+        private async Task NoobWindowOpen()
+        {
+            var chnl = Context.Guild.GetTextChannel(Config.TheNoobGateChannel);
+            await chnl.AddPermissionOverwriteAsync(Context.Guild.EveryoneRole, openWindow);
 
+            await Context.Channel.SendMessageAsync("Window to the noob gate has been opened");
+        }
+        [Command("noobwindow close")]
+        [RequireUserPermission(GuildPermission.ViewAuditLog)]
+        private async Task NoobWindowclose()
+        {
+            var chnl = Context.Guild.GetTextChannel(Config.TheNoobGateChannel);
+            await chnl.AddPermissionOverwriteAsync(Context.Guild.EveryoneRole, closeWindow);
+
+            await Context.Channel.SendMessageAsync("Window to the noob gate has been closed");
+        }
     }
 }
