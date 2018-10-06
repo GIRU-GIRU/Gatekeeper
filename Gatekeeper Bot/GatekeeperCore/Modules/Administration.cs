@@ -14,6 +14,8 @@ namespace GIRUBotV3.Modules
 {
     public class Administration : ModuleBase<SocketCommandContext>
     {
+
+       
         [Command("commencepurge")]
         [RequireUserPermission(GuildPermission.ManageGuild)]
         private async Task ThePurge()
@@ -22,6 +24,9 @@ namespace GIRUBotV3.Modules
             var noobRole = Helpers.ReturnRole(Context.Guild, "noob");
             int purgeReminderCount = 0;
             int amountToBePurged = 0;
+            
+
+
             ITextChannel theNoobGateChannel = Context.Guild.GetChannel(Config.TheNoobGateChannel) as ITextChannel;
 
             foreach (var item in allUsers)
@@ -39,7 +44,9 @@ namespace GIRUBotV3.Modules
 
 
             await Context.Channel.SendMessageAsync($"The Purge is commencing in 5 seconds, cleansing all shitters from Melee Slasher");
-            await theNoobGateChannel.SendMessageAsync($"@here you're about to get fucking cleaned out you worthless fucking trash");
+            await noobRole.ModifyAsync(x => x.Mentionable = true);
+            await theNoobGateChannel.SendMessageAsync($"{noobRole.Mention} you're about to get fucking cleaned out you worthless fucking trash");
+            await noobRole.ModifyAsync(x => x.Mentionable = false);
 
             Task.Delay(5000).Wait();
 
