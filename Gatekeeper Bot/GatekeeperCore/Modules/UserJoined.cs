@@ -80,7 +80,7 @@ namespace GIRUBotV3.Modules
             int pull = rnd.Next(welcomeArray.Length);
             string welcomeMessage = welcomeArray[pull].ToString();
 
-            Task.Delay(8000).Wait();
+            Task.Delay(15000).Wait();
 
             await chnl.SendMessageAsync(messageStateYourRegion);
             await chnl.SendMessageAsync(welcomeMessage + messageInfo);
