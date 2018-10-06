@@ -19,6 +19,7 @@ namespace GIRUBotV3.Personality
             "son of bastard",
             "spastic",
             "fat cunt",
+            "pussy",
             "cockroach",
             "stupid fuck",
             "gay cunt",
@@ -38,9 +39,8 @@ namespace GIRUBotV3.Personality
             "gay",
             "shitter",
             "gimp",
-            "pubber trash",
+            "pub trash",
             "slut bitch",
-           "delinquent"
            };
                int pull = rnd.Next(insultsArray.Length);
                string insult = insultsArray[pull].ToString();

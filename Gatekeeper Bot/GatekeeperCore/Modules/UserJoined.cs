@@ -25,7 +25,14 @@ namespace GIRUBotV3.Modules
             string[] aggressArray = new string[]
             {
                $"lmfao why you asking me for help? {insult}.",
+               $"yea keep asking for help",
+               $"yea that's right keep asking for help",
+               $"rly love it when some {insult} begs me for help",
+               $"lmfao, asking for help like some loser",
                $"hahah no1 gonna help u fucking retard",
+               $"get fucked {insult} aint no1 gonna help u LMFAO",
+               $"ur irritating",
+               $"{dubjoyEmoji} keep crying for help",
                $"you're alone here, nobody even wants you",
                $"LOL you actually asked for help {dubjoyEmoji}",
                $"fucking weak {insult} asking for help,",
@@ -33,14 +40,19 @@ namespace GIRUBotV3.Modules
                $"stfu, i wasn't serious about helping",
                $"you expect some warm welcome or something ? wtf u think this place is {dubjoyEmoji}",
                $"ugh",
+               $"hahaha why u crying for help {insult}",
+               $"lmfao, u think some1 gonna help u ?",
+               $"nobody gonna help u son",
+               $"cant u do things by urself? why are u such a pathetic loser that needs help",
+               $"why don't you ask your mommy for help instead you fucking {insult} {dubjoyEmoji}",
                $"why don't you ask your mommy for help instead you fucking {insult}",
                $"nah",
                $"no",
                $"na",
                $"cry more {insult}",
-               $"mb later.. {dubjoyEmoji}",
+               $"maybe later.. {dubjoyEmoji}",
                $"{dubjoyEmoji}",
-               $"{dubjoyEmoji} actually asked for help"
+               $"{dubjoyEmoji} u actually asked for help"
 
             };
             Random rnd = new Random();
@@ -71,19 +83,18 @@ namespace GIRUBotV3.Modules
                $"Hello {insult}. {guildUser.Mention},",
                $"Greetings {guildUser.Mention}.",
                $"{guildUser.Mention} has just joined the server, check the new {insult}. ",
-               $"{guildUser.Mention} has connected to the server, someone see to this {insult}.",
+               $"User {guildUser.Mention} has connected - someone see to this {insult}.",
 
             };
-            var messageStateYourRegion = "State your region; Europe, North America, Russia, Oceania, South America or Africa while you wait to be seen";
-            var messageInfo = " Write +help for more information.";
+            var messageStateYourRegion = "Firstly - state your region; Europe, North America, Russia, Oceania, South America or Africa.";
+            var messageInfo = "Write +help for instructions to get inside to Melee Slasher.";
 
             int pull = rnd.Next(welcomeArray.Length);
             string welcomeMessage = welcomeArray[pull].ToString();
 
             Task.Delay(15000).Wait();
 
-            await chnl.SendMessageAsync(messageStateYourRegion);
-            await chnl.SendMessageAsync(welcomeMessage + messageInfo);
+            await chnl.SendMessageAsync(welcomeMessage + "\n" + messageStateYourRegion + "\n" + messageInfo);
         }
 
 

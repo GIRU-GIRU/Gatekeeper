@@ -37,8 +37,9 @@ namespace GIRUBotV3
             _client = new DiscordSocketClient();
             _commands = new CommandService();
             //_onMessage = new OnMessage(_client);
+            //_onExecutedCommand = new OnExecutedCommand(_client);  
             _botInitialization = new BotInitialization(_client);
-            //_onExecutedCommand = new OnExecutedCommand(_client);
+          
             
             _services = new ServiceCollection()
                  .AddSingleton(_commands)
