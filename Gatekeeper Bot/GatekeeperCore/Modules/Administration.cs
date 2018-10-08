@@ -98,14 +98,16 @@ namespace GIRUBotV3.Modules
 
         OverwritePermissions openWindow = new OverwritePermissions(readMessages: PermValue.Inherit);
         OverwritePermissions closeWindow = new OverwritePermissions(readMessages: PermValue.Deny);
+        OverwritePermissions noTalk = new OverwritePermissions(sendMessages: PermValue.Deny);
         [Command("noobwindow open")]
         [RequireUserPermission(GuildPermission.ViewAuditLog)]
         private async Task NoobWindowOpen()
         {
             var chnl = Context.Guild.GetTextChannel(Config.TheNoobGateChannel);
             await chnl.AddPermissionOverwriteAsync(Context.Guild.EveryoneRole, openWindow);
+            await chnl.AddPermissionOverwriteAsync(Context.Guild.EveryoneRole, noTalk);
 
-            await Context.Channel.SendMessageAsync("Window to the noob gate has been opened");
+            await Context.Channel.SendMessageAsync($"A window to the noob gate has been opened: {chnl.Mention}");
         }
         [Command("noobwindow close")]
         [RequireUserPermission(GuildPermission.ViewAuditLog)]
@@ -114,7 +116,7 @@ namespace GIRUBotV3.Modules
             var chnl = Context.Guild.GetTextChannel(Config.TheNoobGateChannel);
             await chnl.AddPermissionOverwriteAsync(Context.Guild.EveryoneRole, closeWindow);
 
-            await Context.Channel.SendMessageAsync("Window to the noob gate has been closed");
+            await Context.Channel.SendMessageAsync("The noob gate window has been closed");
         }
     }
 }
