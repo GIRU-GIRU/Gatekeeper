@@ -21,10 +21,10 @@ namespace Gatekeeper.Modules
             _client = client;
         }
 
-        private static int noobRoleCount = 0;
         private static string randomTargetNoob;
         public static async Task StartUpMessages()
         {
+            int noobRoleCount = 0;
             var chnl = _client.GetChannel(Config.MeleeSlasherMainChannel) as ITextChannel;
             await chnl.SendMessageAsync("Gatekeeper initializing...");
             Task.Delay(500).Wait();

@@ -25,10 +25,7 @@ namespace GIRUBotV3.Modules
             int purgeReminderCount = 0;
             int amountToBePurged = 0;
             
-
-
             ITextChannel theNoobGateChannel = Context.Guild.GetChannel(Config.TheNoobGateChannel) as ITextChannel;
-
             foreach (var item in allUsers)
             {
                 if (item.Roles.Contains(noobRole))
@@ -48,7 +45,7 @@ namespace GIRUBotV3.Modules
             await theNoobGateChannel.SendMessageAsync($"{noobRole.Mention} you're about to get fucking cleaned out you worthless fucking trash");
             await noobRole.ModifyAsync(x => x.Mentionable = false);
 
-            Task.Delay(5000).Wait();
+            await Task.Delay(5000);
 
             foreach (var user in allUsers)
             {
