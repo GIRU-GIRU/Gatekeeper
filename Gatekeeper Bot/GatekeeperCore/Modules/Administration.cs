@@ -14,8 +14,42 @@ namespace GIRUBotV3.Modules
 {
     public class Administration : ModuleBase<SocketCommandContext>
     {
+        [Command("warn")]
+        [RequireUserPermission(GuildPermission.MoveMembers)]
+        private async Task WarnUserCustom(IGuildUser user, [Remainder]string warningMessage)
+        {
+            try
+            {
+                await user.SendMessageAsync("You have been warned in Melee Slasher for: " + warningMessage);
+                await Context.Channel.SendMessageAsync($"⚠      *** {user.Username} has received a warning.      ⚠***");
+            }
+            catch (HttpException ex)
+            {
+                await Context.Channel.SendMessageAsync($"{user.Mention}, {warningMessage}");
+            }
+        }
+        [Command("stealthpootime")]
+        [RequireUserPermission(GuildPermission.MoveMembers)]
+        private async Task WarnUserpooCustom(IGuildUser user, [Remainder]string warningMessage)
+        {
+            try
+            {
+                await user.SendMessageAsync("You have been warned in Melee Slasher for: " + warningMessage);
+                 var postedWarningMessage = await Context.Channel.SendMessageAsync($"⚠      *** {user.Username} has received a warning.      ⚠***");
+   
+                await Context.Message.DeleteAsync();
+                await postedWarningMessage.DeleteAsync();
+            }
+            catch (HttpException ex)
+            {
+                var postedWarningMessage = await Context.Channel.SendMessageAsync($"{user.Mention}, {warningMessage}");
 
-       
+                await Context.Message.DeleteAsync();
+                await postedWarningMessage.DeleteAsync();
+            }
+        }
+
+
         [Command("commencepurge")]
         [RequireUserPermission(GuildPermission.ManageGuild)]
         private async Task ThePurge()

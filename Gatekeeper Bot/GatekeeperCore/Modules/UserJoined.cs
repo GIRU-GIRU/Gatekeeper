@@ -86,7 +86,7 @@ namespace GIRUBotV3.Modules
                $"User {guildUser.Mention} has connected - someone see to this {insult}.",
 
             };
-            var messageStateYourRegion = "Firstly - state your region; Europe, North America, Russia, Oceania, South America or Africa.";
+            var messageStateYourRegion = ""; //"Firstly - state your region; Europe, North America, Russia, Oceania, South America or Africa.";
             var messageInfo = "Write +help for instructions to get inside to Melee Slasher.";
 
             int pull = rnd.Next(welcomeArray.Length);
