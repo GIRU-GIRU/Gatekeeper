@@ -32,8 +32,8 @@ namespace GIRUBotV3.Modules
         {
 
             var guildUserIGuildUser = guildUser as IGuildUser;
-            var noobGateChannel = guildUser.Guild.GetChannel(Config.TheNoobGateChannel);
-            var chnl = noobGateChannel as ITextChannel;
+            var chnl = guildUser.Guild.GetChannel(Config.TheNoobGateChannel) as ITextChannel;
+            var mainchnl = guildUser.Guild.GetChannel(Config.MeleeSlasherMainChannel) as ITextChannel;
 
             var insult = await Insults.GetInsult();
             Random rnd = new Random();
@@ -44,7 +44,7 @@ namespace GIRUBotV3.Modules
             if (CommandToggles.WelcomeMessages)
             {
                 var welcomeMessageMain = await WarmWelcome.GetWelcomeArrayMain(guildUser, rnd);
-                await chnl.SendMessageAsync(welcomeMessageMain);
+                await mainchnl.SendMessageAsync(welcomeMessageMain);
             }
 
             ITextChannel logChannel = guildUser.Guild.GetChannel(Config.UserJoinedLogChannel) as ITextChannel;
