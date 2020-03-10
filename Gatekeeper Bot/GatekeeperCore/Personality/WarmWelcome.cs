@@ -89,6 +89,11 @@ namespace Gatekeeper.Personality
             return aggressArray[pull].ToString();
         }
 
-    }
+        public static async Task<string> GetHelpfulNoobString()
+        {
+            return "You are waiting for a moderator\n\nState your region and whether you own Mordhau or not in order to access the server, E.G. ```EU, Yes```";
+
+        }
+    } 
 }
 

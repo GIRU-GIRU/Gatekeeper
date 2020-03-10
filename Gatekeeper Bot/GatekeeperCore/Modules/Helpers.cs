@@ -58,6 +58,13 @@ namespace GIRUBotV3.Modules
             }
         }
 
+        public static string FindEmojiNew(SocketGuildUser user, string emojiName)
+        {
+            var emoji = user.Guild.Emotes.Where(x => x.Name.ToLower() == emojiName.ToLower()).FirstOrDefault();
+            if (emoji != null) return $"<:{emoji.Name}:{emoji.Id}>";
+            return "";       
+        }
+
         public static string FindEmoji(SocketGuildUser user, string emojiName)
         {
             var result = from r in user.Guild.Emotes

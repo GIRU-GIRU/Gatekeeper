@@ -24,14 +24,12 @@ namespace GIRUBotV3.Modules
             var insult = await Insults.GetInsult();
            
             Random rnd = new Random();
-            var aggressString = await WarmWelcome.GetAggressNoobString(Context.Message.Author as SocketGuildUser, rnd);
-            await Context.Channel.SendMessageAsync(aggressString);
+            var welcomeMsg = await WarmWelcome.GetHelpfulNoobString();
+            await Context.Channel.SendMessageAsync(welcomeMsg);
         }
       
         public static async Task UserJoinedServer(SocketGuildUser guildUser)
         {
-
-            var guildUserIGuildUser = guildUser as IGuildUser;
             var chnl = guildUser.Guild.GetChannel(Config.TheNoobGateChannel) as ITextChannel;
             var mainchnl = guildUser.Guild.GetChannel(Config.MeleeSlasherMainChannel) as ITextChannel;
 
@@ -49,7 +47,7 @@ namespace GIRUBotV3.Modules
 
             ITextChannel logChannel = guildUser.Guild.GetChannel(Config.UserJoinedLogChannel) as ITextChannel;
             await logChannel.SendMessageAsync($"{guildUser.Username}#{guildUser.Discriminator} joined Melee Slasher. UserID = {guildUser.Id}");        
-            var messageInfo = "Write +help for instructions to get inside to Melee Slasher.";
+            var messageInfo = "Write +help for instructions";
             var greetingMessage = await WarmWelcome.GetWelcomeArrayNoobGate(guildUser, rnd) + "\n" + messageInfo;
       
             _ = Task.Run(async () => await GreetUser(chnl, greetingMessage));

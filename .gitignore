@@ -11,3 +11,5 @@ Gatekeeper Bot/sh.exe.stackdump
 *.config
 *.props
 *.pdb
+Gatekeeper Bot/GatekeeperCore/Config.cs
+Gatekeeper Bot/GatekeeperCore/Config.cs

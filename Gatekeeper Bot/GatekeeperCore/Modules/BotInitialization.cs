@@ -26,7 +26,7 @@ namespace Gatekeeper.Modules
         {
             int noobRoleCount = 0;
             var chnl = _client.GetChannel(Config.MeleeSlasherMainChannel) as ITextChannel;
-            await chnl.SendMessageAsync("Gatekeeper initializing...");
+            await chnl.SendMessageAsync(Config.BotInitializationMessage);
             Task.Delay(500).Wait();
 
             await chnl.SendMessageAsync("...");
@@ -37,7 +37,7 @@ namespace Gatekeeper.Modules
             var noobChnlUsers = noobChnl.Users;
             var noobRole = Helpers.ReturnRole(chnl.Guild as SocketGuild, "noob");
 
-            //cout noob role
+            //count noob role
             foreach (var item in noobChnlUsers)
             {
                 var user = item as SocketGuildUser;
@@ -58,7 +58,7 @@ namespace Gatekeeper.Modules
             }
             else
             {
-                await chnl.SendMessageAsync($"There are {noobRoleCount} noobs for me to deal with, the first being { randomTargetNoob}");
+                await chnl.SendMessageAsync($"There are {noobRoleCount} noobs for me to deal with, the first being {randomTargetNoob}");
             }
            
         }
